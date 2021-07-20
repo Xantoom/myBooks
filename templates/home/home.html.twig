@@ -1,0 +1,18 @@
+{% extends "base.html.twig" %}
+
+{% block body %}
+    <div class="container">
+        <div class="row">
+            {% for book in books %}
+            <div class="card" style="width: 18rem;">
+                <img class="card-img-top" src="{{ book.picture }}" alt="Image du livre">
+                <div class="card-body">
+                    <h5 class="card-title">{{ book.title }} de {{ book.author }}</h5>
+                    <p class="card-text">{{ book.summary }}</p>
+                    <a href="{{ path('book_crud_show', {'id': book.id}) }}" class="btn btn-primary">Voir le détails</a>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+{% endblock %}

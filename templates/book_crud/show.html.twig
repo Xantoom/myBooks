@@ -1,0 +1,59 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Book{% endblock %}
+
+{% block body %}
+    <h1>Book</h1>
+
+    <table class="table">
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ book.id }}</td>
+            </tr>
+            <tr>
+                <th>Title</th>
+                <td>{{ book.title }}</td>
+            </tr>
+            <tr>
+                <th>Author</th>
+                <td>{{ book.author }}</td>
+            </tr>
+            <tr>
+                <th>PublishedAt</th>
+                <td>{{ book.publishedAt ? book.publishedAt|date('Y-m-d H:i:s') : '' }}</td>
+            </tr>
+            <tr>
+                <th>Summary</th>
+                <td>{{ book.summary }}</td>
+            </tr>
+            <tr>
+                <th>Picture</th>
+                <td><img src="{{ book.picture }}" alt="Image du livre"></td>
+            </tr>
+        </tbody>
+    </table>
+
+    <a class="btn btn-primary" href="{{ path('home') }}">back to list</a><br><br>
+    <a class="btn btn-primary" href="{{ path('book_crud_edit', {'id': book.id}) }}">edit</a>
+    {{ include('book_crud/_delete_form.html.twig') }}<br>
+
+    <div class="col">
+        {% for comm in commentaries %}
+            <div>
+                <strong>{{ comm.firstName }} {{ comm.lastName }}</strong> le {{ comm.createdAt | date('Y-m-d H:i:s') }} a dit :<br>
+                {{ comm.text }}
+            </div>
+        {% endfor %}
+    </div>
+    <script>
+        fetch({{ app.request.uri }})
+            .then(function() {
+
+            })
+            .catch(function() {
+
+            });
+    </script>
+    <a class="btn btn-primary" href="{{ path('comm_new', {'id': book.id}) }}">Nouveau commentaire</a>
+{% endblock %}
